@@ -18,7 +18,15 @@ public class CardService {
 		return cr.findByDeckId(deckId);
 	}
 	
+	public Card getCard(Integer id) {
+		return cr.findById(id).orElse(null);
+	}
+	
 	public Card saveCard(Card card) {
+		return cr.save(card);
+	}
+	
+	public Card updateCard(Card card) {
 		return cr.save(card);
 	}
 	

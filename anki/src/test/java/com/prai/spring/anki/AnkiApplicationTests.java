@@ -1,8 +1,5 @@
 package com.prai.spring.anki;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +7,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import com.prai.spring.anki.entities.Card;
+import com.prai.spring.anki.entities.Deck;
 import com.prai.spring.anki.repos.CardRepo;
 import com.prai.spring.anki.repos.DeckRepo;
+import com.prai.spring.anki.services.DeckService;
 
 
 @ExtendWith(SpringExtension.class)
@@ -24,6 +22,9 @@ class AnkiApplicationTests {
 	
 	@Autowired
 	DeckRepo dp;
+	
+	@Autowired
+	DeckService ds;
 	
 	@Autowired
 	CardRepo cr;
@@ -47,12 +48,16 @@ class AnkiApplicationTests {
 //		cd.setTags(tgs);
 //		cr.save(cd);
 		
-		List<Card> cards = cr.findByDeckId(1);
-		for (Card c: cards) {
-			System.out.println(c);
+//		List<Card> cards = cr.findByDeckId(1);
+//		for (Card c: cards) {
+//			System.out.println(c);
+//		}
+		
+		Deck d = ds.getDeckByName("Java");
+		
+		if (d != null) {
+			System.out.println(d);
 		}
-		
-		
 	}
 
 }

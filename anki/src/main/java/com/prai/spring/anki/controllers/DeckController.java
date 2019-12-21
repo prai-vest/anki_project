@@ -3,6 +3,7 @@ package com.prai.spring.anki.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,17 +41,21 @@ public class DeckController {
 	
 	@PostMapping
 	public ResponseEntity<Deck> saveDeck(@RequestBody Deck deck) {
-		Deck savedDeck = ds.saveDeck(deck);
-		if (savedDeck == null) {
-			return ResponseEntity.notFound().build();
+		if (ds.getDeckByName(deck.getName()) != null) {
+			return ResponseEntity.status(HttpStatus.CONFLICT).build();
 		} else {
-			return ResponseEntity.ok(savedDeck);
+			Deck savedDeck = ds.saveDeck(deck);
+			if (savedDeck == null) {
+				return ResponseEntity.notFound().build();
+			} else {
+				return ResponseEntity.ok(savedDeck);
+			}
 		}
 	}
 	
 	@PutMapping
 	public ResponseEntity<Deck> updateDeck(@RequestBody Deck deck) {
-		Deck updatedDeck = ds.saveDeck(deck);
+		Deck updatedDeck = ds.updateDeck(deck);
 		if (updatedDeck == null) {
 			return ResponseEntity.notFound().build();
 		} else {

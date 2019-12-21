@@ -32,7 +32,7 @@ public class CardController {
 	
 	@PutMapping
 	public ResponseEntity<Card> updateCard(@RequestBody Card card) {
-		Card updatedCard = cs.saveCard(card);
+		Card updatedCard = cs.updateCard(card);
 		if (updatedCard == null) {
 			return ResponseEntity.notFound().build();
 		} else {
