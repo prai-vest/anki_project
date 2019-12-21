@@ -24,7 +24,8 @@ public class Card {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	private Integer deckid;
+	@Column(name = "deckid")
+	private Integer deckId;
 	
 	private String front;
 	
@@ -56,12 +57,12 @@ public class Card {
 		this.id = id;
 	}
 
-	public Integer getDeckid() {
-		return deckid;
+	public Integer getDeckId() {
+		return deckId;
 	}
 
 	public void setDeckid(Integer deckid) {
-		this.deckid = deckid;
+		this.deckId = deckid;
 	}
 
 	public String getFront() {
@@ -122,7 +123,7 @@ public class Card {
 
 	@Override
 	public String toString() {
-		return "Card [id=" + id + ", deckid=" + deckid + ", front=" + front + ", back=" + back + ", cardType=" + cardType
+		return "Card [id=" + id + ", deckid=" + deckId + ", front=" + front + ", back=" + back + ", cardType=" + cardType
 				+ ", lastAcessed=" + lastAcessed + ", createdAt=" + createdAt + ", tags=" + Arrays.toString(tags) + ", dueDate="
 				+ dueDate + "]";
 	}
