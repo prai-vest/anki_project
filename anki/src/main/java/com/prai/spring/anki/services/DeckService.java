@@ -18,4 +18,11 @@ public class DeckService {
 		return dr.find();
 	}
 	
+	public Deck saveDeck(Deck deck) {
+		return dr.save(deck);
+	}
+	
+	public void deleteDeck(Integer id) {
+		dr.deleteById(id);
+	}
 }

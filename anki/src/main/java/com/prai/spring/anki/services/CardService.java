@@ -17,4 +17,12 @@ public class CardService {
 	public List<Card> getCardsByDeckId(Integer deckId) {
 		return cr.findByDeckId(deckId);
 	}
+	
+	public Card saveCard(Card card) {
+		return cr.save(card);
+	}
+	
+	public void deleteCard(Integer id) {
+		cr.deleteById(id);
+	}
 }

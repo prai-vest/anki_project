@@ -1,11 +1,8 @@
 package com.prai.spring.anki.controllers;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -14,53 +11,38 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.prai.spring.anki.entities.Card;
-import com.prai.spring.anki.entities.Deck;
 import com.prai.spring.anki.services.CardService;
-import com.prai.spring.anki.services.DeckService;
 
 @RestController
-@RequestMapping("decks")
-public class DeckController {
+@RequestMapping("cards")
+public class CardController {
 
-	@Autowired
-	DeckService ds;
-	
 	@Autowired
 	CardService cs;
 	
-	@GetMapping
-	public List<Deck> decks() {
-		return ds.getDecks();
-	}
-	
-	@GetMapping("/{deckId}/cards")
-	public List<Card> cards(@PathVariable("deckId") Integer deckId) {
-		return cs.getCardsByDeckId(deckId);
-	}
-	
 	@PostMapping
-	public ResponseEntity<Deck> saveDeck(@RequestBody Deck deck) {
-		Deck savedDeck = ds.saveDeck(deck);
-		if (savedDeck == null) {
+	public ResponseEntity<Card> saveCard(@RequestBody Card card) {
+		Card savedCard = cs.saveCard(card);
+		if (savedCard == null) {
 			return ResponseEntity.notFound().build();
 		} else {
-			return ResponseEntity.ok(savedDeck);
+			return ResponseEntity.ok(savedCard);
 		}
 	}
 	
 	@PutMapping
-	public ResponseEntity<Deck> updateDeck(@RequestBody Deck deck) {
-		Deck updatedDeck = ds.saveDeck(deck);
-		if (updatedDeck == null) {
+	public ResponseEntity<Card> updateCard(@RequestBody Card card) {
+		Card updatedCard = cs.saveCard(card);
+		if (updatedCard == null) {
 			return ResponseEntity.notFound().build();
 		} else {
-			return ResponseEntity.ok(updatedDeck);
+			return ResponseEntity.ok(updatedCard);
 		}
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Object> deleteDeck(@PathVariable Integer id) {
-		ds.deleteDeck(id);
+	public ResponseEntity<Object> deleteCard(@PathVariable Integer id) {
+		cs.deleteCard(id);
 		return ResponseEntity.noContent().build();
 	}
 }
